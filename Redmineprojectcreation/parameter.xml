@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  <apiKey>0abca9d4dea0b22206a97030e32d264d4e346af0</apiKey>
+  <url>192.168.220.128/</url>
+  <template name="template1" id="root2">
+    <issue name="1" description="45" start_date="25.01.2013" assigned="" due_date="">
+      <subtak name="" description="" start_date="" assigned="" due_date=""></subtak>
+      <subtak name="" description="" start_date="" assigned="" due_date=""></subtak>
+    </issue>
+    <issue name="2" description="67" start_date="25.01.2013" assigned="" due_date="">
+      <subtak name="" description="" start_date="" assigned="" due_date=""></subtak>
+      <subtak name="" description="" start_date="" assigned="" due_date=""></subtak>
+    </issue>
+  </template>
+</data>
