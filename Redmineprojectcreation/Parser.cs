@@ -39,27 +39,31 @@ namespace Redmineprojectcreation
             defaultURL = xDoc.GetElementsByTagName("url")[0].InnerText;
         }
 
-        public List<Issue> getIssuesFromProject(Project project)
+        public List<Issue> getIssuesFromProject(Project projectTemplate,Project project)
         {
             XmlNodeList tmp = xDoc.GetElementsByTagName("template");
             if (!(tmp == null))
             {
                 foreach (XmlNode i in tmp)
                 {
-                    if (i.Attributes["id"].Value == project.Name)
+                    if (i.Attributes["id"].Value == projectTemplate.Name)
                     {
                         foreach (XmlNode j in i.ChildNodes)
                         {
                             DateTime f;
                             DateTime.TryParse(j.Attributes["start_date"].Value,out f);
-                                issues.Add(new Issue()
-                                {
-                                    Project = project,
-                                    AssignedTo = new IdentifiableName() { Name = j.Attributes["assigned"].Value },
-                                    Description = j.Attributes["description"].Value,
-                                    Subject = j.Attributes["name"].Value,
-                                    StartDate = f,
-                                });
+
+                            issues.Add(new Issue()
+                            {
+                                Project = new IdentifiableName() { Id = project.Id },
+                                Priority = new IdentifiableName() { Id = 4 },
+                                Status = new IdentifiableName() { Id = 3 },
+                                AssignedTo = new IdentifiableName() { Id = 14 },
+                                Category = new IdentifiableName() { Id = 2 },
+                                Description = j.Attributes["description"].Value,
+                                Subject = j.Attributes["name"].Value,
+                                //StartDate = f,
+                            });
                             int index = issues.Count();
                                 foreach (XmlNode k in j.ChildNodes)
                                 {
@@ -67,27 +71,27 @@ namespace Redmineprojectcreation
                                     DateTime.TryParse(j.Attributes["start_date"].Value, out t);
                                     issues.Add(new Issue()
                                     {
-                                        Project = project,
-                                        AssignedTo = new IdentifiableName() { Name = k.Attributes["assigned"].Value },
+                                        Project = new IdentifiableName() { Id = project.Id },
+                                        Priority = new IdentifiableName() { Id = 4 },
+                                        Status = new IdentifiableName() { Id = 3 }, 
+                                        //AssignedTo = new IdentifiableName() { Name = k.Attributes["assigned"].Value },
                                         Description = k.Attributes["description"].Value,
                                         Subject = k.Attributes["name"].Value,
-                                        StartDate = t,
+                                        //StartDate = t,
                                         ParentIssue = new IdentifiableName() { Name = issues[index-1].Subject, Id = issues[index-1].Id, },
                                     });
 
                                 }
                         }
                     }
-                    Issue b = new Issue();
                 }
+                return issues;
             }
             else
             {
                 System.Windows.Forms.MessageBox.Show("Aucun Template trouvé");
+                return null;
             }
-
-            return null;
-
         }
 
         public void changeApiKey(string temp)

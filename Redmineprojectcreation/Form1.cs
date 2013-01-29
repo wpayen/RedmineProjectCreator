@@ -22,6 +22,7 @@ namespace Redmineprojectcreation
         Boolean productSelected = false;
         RedmineManager redmine;
         BindingList<Project> products = new BindingList<Project>();
+        List<Issue> issues = new List<Issue>();
         Random Ramdom = new Random();
 
         public Window()
@@ -44,6 +45,7 @@ namespace Redmineprojectcreation
                     try
                     {
                         createProject();
+                        MessageBox.Show("OK");
                     }
                     catch (RedmineException error)
                     {
@@ -106,7 +108,19 @@ namespace Redmineprojectcreation
             try
             {
                 redmine.CreateObject<Project>(newProject);
-                parser.getIssuesFromProject(((Project)productSelector.SelectedItem));
+                
+
+                foreach(Project index in redmine.GetTotalObjectList<Project>( new NameValueCollection { { "name", "*" } }))
+                {
+                    if (index.Name == newProject.Name)
+                    {
+                        issues = parser.getIssuesFromProject(((Project)productSelector.SelectedItem), index);
+                    }
+                }
+                foreach (Issue tmp in issues)
+                {
+                    redmine.CreateObject(tmp);
+                }
             }
             catch(RedmineException error)
             {
@@ -118,7 +132,7 @@ namespace Redmineprojectcreation
                     {
                         if (newProject.Identifier == issue.Identifier)
                         {
-                            throw new RedmineException("Projet déja existant");
+                            throw new RedmineException("Projet déja existant : "+error.Message);
                         }
                     }
                 }
@@ -236,3 +250,4 @@ namespace Redmineprojectcreation
 
     }
 }
+

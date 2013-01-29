@@ -1,15 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <data>
-  <apiKey>0abca9d4dea0b22206a97030e32d264d4e346af0</apiKey>
-  <url>192.168.220.128/</url>
-  <template name="template1" id="root2">
-    <issue name="1" description="45" start_date="25.01.2013" assigned="" due_date="">
+  <apiKey>e69e33971ab989cb96582ab0ab1514612ca8ef61</apiKey>
+  <url>projects.syselcloud.ch:8888/</url>
+  <template name="template1" id="SyselBackup">
+    <issue name="1" description="45" start_date="25.01.2013" assigned="" due_date="" Status="" Priority="" Category="">
       <subtak name="" description="" start_date="" assigned="" due_date=""></subtak>
       <subtak name="" description="" start_date="" assigned="" due_date=""></subtak>
     </issue>
     <issue name="2" description="67" start_date="25.01.2013" assigned="" due_date="">
-      <subtak name="" description="" start_date="" assigned="" due_date=""></subtak>
-      <subtak name="" description="" start_date="" assigned="" due_date=""></subtak>
     </issue>
   </template>
 </data>
